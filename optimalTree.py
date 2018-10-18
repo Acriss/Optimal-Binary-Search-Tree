@@ -28,7 +28,7 @@ class OptimalTree:
                 # Trying to get Cost[i][j] and Root[i][j]
 
                 j = i + l -1
-                # Thanks to the article, we must only iterate between Root[i][j - 1] and Root[i +1][j]
+                # Thanks to the ressources from this [article](http://www.inrg.csie.ntu.edu.tw/algorithm2014/presentation/Knuth71.pdf), we must only iterate between Root[i][j - 1] and Root[i +1][j]
 
                 computed_weights = [(self.cost[i][k - 1] if k - 1 >= i else 0) + (self.cost[k + 1][j] if k + 1 <= j else 0)
                 for k in range(self.root[i][j - 1], self.root[i + 1][j] + 1)]
@@ -51,6 +51,7 @@ class OptimalTree:
         return parents
 
     def build_sub_tree(self, parents, i, j, index):
+        # Recursively build the tree from the root down to the leaves
         parents[self.root[i][j]] = index
         if (i < j):
             if (i <= self.root[i][j] - 1):
